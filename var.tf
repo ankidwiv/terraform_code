@@ -19,27 +19,3 @@ variable "cidr_blocks" {
     zone1 = "10.0.2.0/24"
   }
 }
-
-variable "instance_count" {
-
-    default = 2
-}
-
-variable "ami" {
-    type = "map"
-    
-    default = {
-    us-east-1 = "ami-6871a115"
-    ap-south-1 = "ami-5b673c34"
-    
-    }
-    
-}
-
-variable "instance_type" {
-    default = "t2.micro"
-    
-}
-
-
-

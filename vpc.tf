@@ -7,4 +7,3 @@ resource "aws_vpc" "My_Vpc" {
     name = "My_Vpc"
   }
 }
-

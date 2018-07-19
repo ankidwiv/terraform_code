@@ -8,4 +8,3 @@ resource "aws_subnet" "Public_subnet" {
     name = " Public_subnet "
   }
 }
-
