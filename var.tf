@@ -1,5 +1,6 @@
 variable "aws_region" {
-  default = {
+	type = "map"  
+default = {
     ap-south-1 = "ap-south-1"
     us-east-1  = "us-east-1a"
   }
