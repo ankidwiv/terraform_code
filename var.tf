@@ -19,7 +19,7 @@ variable "cidr_blocks" {
 }
 
 variable "AZ" {
-    type = "list"
+    type = "map"
     default = {
     ap-south-1 = ["ap-south-1a", "ap-south-1b"]
     us-east-1 = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d" ]
