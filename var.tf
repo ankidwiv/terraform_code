@@ -1,5 +1,8 @@
 variable "aws_region" {
-  default = "ap-south-1"
+  default = {
+  ap-south-1 = "ap-south-1"
+  us-east-1 = "us-east-1a"
+ 
 }
 
 variable "zones" {
