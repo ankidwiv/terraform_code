@@ -40,3 +40,15 @@ variable "instance_type" {
     default = "t2.micro"
     
 }
+
+
+variable "ssh_key" {
+    type = "map"
+    default = {
+    us-east-1 = "My-us-east-key"
+    ap-south-1 = "MyEc2key"
+    
+    }
+    
+}
+    
