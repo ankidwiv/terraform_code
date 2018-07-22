@@ -1,10 +1,10 @@
 resource "aws_instance" "my-instances" {
   count         = "${var.instance_count}"
-  ami           = "${lookup(var.ami, var.aws_region)}"
+  ami           = "${var.ami}"
   instance_type = "${var.instance_type}"
-  key_name      = "${lookup(var.ssh_key, var.aws_region)}"
+  key_name      = "${var.ssh_key}"
 
   tags {
-    Name = "Terraform-${count.index}"
+    Name = "Terraform-${count.index +1}"
   }
 }
