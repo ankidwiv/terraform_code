@@ -1,5 +1,5 @@
 variable "aws_region" {
-default = "ap-south-1"
+default = "us-east-1"
   
 }
 
@@ -23,7 +23,7 @@ variable "Private_subnet_cidrs" {
 
 variable "AZ" {
     type = "list"
-    default = ["ap-south-1a", "ap-south-1b"]
+    default = ["us-east-1a", "us-east-1b"]
     
 }
 
@@ -33,7 +33,7 @@ variable "instance_count" {
 
 variable "ami" {
 
-  default = "ami-5b673c34"
+  default = "ami-6871a115"
   }
 
 
@@ -43,5 +43,5 @@ variable "instance_type" {
 
 variable "ssh_key" {
 
-  default = "MyEc2key"
+  default = "My-us-east-key"
 }
