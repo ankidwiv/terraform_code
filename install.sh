@@ -2,7 +2,7 @@
 
 Install_packages()
 {
-     yum install httpd php* wget mariadb -y
+   yum install httpd php* wget mariadb nfs* -y
  }
 starting_service()
 {

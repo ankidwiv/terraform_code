@@ -26,6 +26,13 @@ resource "aws_security_group" "Bastion_SG" {
   name   = "Bastion_SG"
 
   ingress {
+    from_port       = "80"
+    to_port         = "80"
+    protocol        = "TCP"
+    security_groups = ["${aws_security_group.LB_SG.id}"]
+  }
+
+  ingress {
     from_port   = "22"
     to_port     = "22"
     protocol    = "TCP"
@@ -55,10 +62,10 @@ resource "aws_security_group" "efs_SG" {
   }
 
   ingress {
-    from_port       = "2049"                     # NFS
+    from_port       = "2049"                                  # NFS
     to_port         = "2049"
     protocol        = "tcp"
-   security_groups = ["${aws_security_group.Bastion_SG.id}"]
+    security_groups = ["${aws_security_group.Bastion_SG.id}"]
   }
 
   egress {
@@ -69,7 +76,6 @@ resource "aws_security_group" "efs_SG" {
   }
 
   tags {
-	Name = "EFS_SG"
+    Name = "EFS_SG"
+  }
 }
-}
-

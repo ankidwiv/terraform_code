@@ -22,6 +22,18 @@ resource "aws_route_table" "Private_route" {
   }
 
   tags {
-    Name = "Public_route-${count.index +1}"
+    Name = "Private_route-${count.index +1}"
   }
+}
+
+resource "aws_route_table_association" "Public_route_association" {
+  count          = "${length(var.Public_subnet_cidrs)}"
+  subnet_id      = "${element(aws_subnet.Public_subnet.*.id, count.index%length(var.Public_subnet_cidrs))}"
+  route_table_id = "${element(aws_route_table.public_route.*.id, count.index%length(var.Public_subnet_cidrs))}"
+}
+
+resource "aws_route_table_association" "Private_route_association" {
+  count          = "${length(var.Private_subnet_cidrs)}"
+  subnet_id      = "${element(aws_subnet.Private_subnet.*.id, count.index%length(var.Private_subnet_cidrs))}"
+  route_table_id = "${element(aws_route_table.Private_route.*.id, count.index%length(var.Private_subnet_cidrs))}"
 }
