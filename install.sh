@@ -7,12 +7,20 @@ Install_packages()
  }
 Aws_cli()
 {
-  curl -O https://bootstrap.pypa.io/get-pip.py
-  python get-pip.py
-  pip install awscli --upgrade --user
-  export PATH=~/.local/bin:$PATH
-  aws configure set default.region us-east-1
-  aws efs describe-file-systems --region us-east-1
+ my_region=`curl -s 169.254.169.254/latest/meta-data/placement/availability-zone| sed 's/[a-z]$//'`
+ my_domain=`curl -s 169.254.169.254/latest/meta-data/services/domain`
+ mkdir /mnt/efs
+ curl -O https://bootstrap.pypa.io/get-pip.py
+ python get-pip.py
+ pip install awscli --upgrade --user
+ export PATH=~/.local/bin:$PATH
+ aws configure set default.region $my_region
+ aws efs describe-file-systems --region $my_region
+ fs_id=`aws efs describe-file-systems --region us-east-1| grep fs- |awk '{print $2}'|tr -d \'\"\,`
+ fs_name="$fs_id.nfs.$my_region.$my_domain"
+ Mount_target="$fs_id.$my_region.$my_domain"
+ mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $Mount_target:/ /mnt/efs
+
 }
 starting_service()
 {
@@ -41,5 +49,6 @@ Install_packages
 starting_service
 #nfs_conf
 Drupal_deploy
-restart_service   
+restart_service
+Aws_cli   
 echo " successful installation!"
