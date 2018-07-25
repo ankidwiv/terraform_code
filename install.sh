@@ -3,7 +3,17 @@
 Install_packages()
 {
    yum install httpd php* wget mariadb nfs* -y
+   
  }
+Aws_cli()
+{
+  curl -O https://bootstrap.pypa.io/get-pip.py
+  python get-pip.py
+  pip install awscli --upgrade --user
+  export PATH=~/.local/bin:$PATH
+  aws configure set default.region us-east-1
+  aws efs describe-file-systems --region us-east-1
+}
 starting_service()
 {
       systemctl start httpd
