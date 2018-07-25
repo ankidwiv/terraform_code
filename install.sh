@@ -20,17 +20,13 @@ Aws_cli()
  fs_name="$fs_id.nfs.$my_region.$my_domain"
  Mount_target="$fs_id.$my_region.$my_domain"
  mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport $Mount_target:/ /mnt/efs
-
+ mount -a
 }
 starting_service()
 {
       systemctl start httpd
  }
-nfs_conf()
-{
-     echo "172.31.18.45:/nfs_share /var/www/html     nfs     defaults     0     0     "| tee --append /etc/fstab
-     mount -a
-}
+
 Drupal_deploy()
 {
       wget https://ftp.drupal.org/files/projects/drupal-7.53.tar.gz
@@ -47,7 +43,6 @@ restart_service()
 }
 Install_packages
 starting_service
-#nfs_conf
 Drupal_deploy
 restart_service
 Aws_cli   
